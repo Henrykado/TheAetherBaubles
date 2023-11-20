@@ -1,0 +1,14 @@
+[
+	{
+		"modid": "aether_baubles",
+		"name": "The Aether's Baubles",
+		"description": "The Aether and Baubles compatibility addon.",
+		"version": "${version}",
+		"mcversion": "1.12.2",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["Henrykado"],
+		"credits": "The Aether Team for creating The Aether mod, and Azanor for creating Baubles",
+		"logoFile": ""
+	}
+]

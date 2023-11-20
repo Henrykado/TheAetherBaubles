@@ -1,0 +1,51 @@
+# Item Names
+item.iron_amulet.name=Iron Amulet
+item.golden_amulet.name=Golden Amulet
+item.zanite_amulet.name=Zanite Amulet
+item.ice_amulet.name=Ice Amulet
+
+# Creative Tabs Names
+tab.aether_baubles=Aether Baubles
+
+# Lore entries
+lore.aether_baubles.leather_gloves=Dyeable gloves to match your leather tunic! This is needed to complete the Leather armor set.
+lore.aether_baubles.iron_gloves=Part of the Iron Armor set, it is needed to complete the Iron Armor set.
+lore.aether_baubles.golden_gloves=Part of the Golden Armor set, it is needed to complete the Gold Armor set.
+lore.aether_baubles.chain_gloves=A very rare part of chain armor, it is needed to complete the Chain Armor set.
+lore.aether_baubles.diamond_gloves=Part of the Diamond Armor set, it is needed to complete the Diamond Armor set.
+
+lore.aether_baubles.zanite_gloves=Part of the Zanite Armor set, it is needed to complete the Zanite Armor set.
+lore.aether_baubles.gravitite_gloves=Part of Aether's best armor set, needed to complete the Gravitite set.
+lore.aether_baubles.neptune_gloves=Found in Silver Dungeons, these gloves are requires to complete the Neptune Armor set, which allows for underwater walking.
+lore.aether_baubles.phoenix_gloves=Found in Gold Dungeons, these gloves are required to finish the Phoenix Armor set, and are needed to convert the full set into Obsidian too.
+lore.aether_baubles.obsidian_gloves=Needed to complete the Obsidian Armor set, you can convert Phoenix Gloves into Obsidian by standing in water while wearing them.
+lore.aether_baubles.valkyrie_gloves=An armor unique to the Silver Dungeon. The gloves are needed to complete the armor set, which grants temporary flight.
+
+lore.aether_baubles.iron_ring=An aesthetic accessory made of iron.
+lore.aether_baubles.golden_ring=An aesthetic accessory made of gold.
+lore.aether_baubles.zanite_ring=A ring which allows you to mine faster. It doesn't last for long, so use it wisely!
+lore.aether_baubles.ice_ring=A ring which allows you to freeze water, and lava when walked on.
+
+lore.aether_baubles.iron_pendant=An aesthetic accessory made of iron.
+lore.aether_baubles.golden_pendant=An aesthetic accessory made of gold.
+lore.aether_baubles.zanite_pendant=A pendant which allows you to mine faster. It doesn't last for long, so use it wisely!
+lore.aether_baubles.ice_pendant=A pendant which allows you to freeze water, and lava when walked on.
+
+lore.aether_baubles.iron_amulet=An aesthetic accessory made of iron.
+lore.aether_baubles.golden_amulet=An aesthetic accessory made of gold.
+lore.aether_baubles.zanite_amulet=A pendant which allows you to mine faster. It doesn't last for long, so use it wisely!
+lore.aether_baubles.ice_amulet=A pendant which allows you to freeze water, and lava when walked on.
+
+lore.aether_baubles.red_cape=A rough feeling cape that is crafted using Red Wool.
+lore.aether_baubles.blue_cape=A Blue Cape that has a silky feeling to it. It's crafted using Blue Wool.
+lore.aether_baubles.yellow_cape=A bright Yellow Cape that is crafted using Yellow Wool.
+lore.aether_baubles.white_cape=A light and fluffy cape that is made from White Wool.
+lore.aether_baubles.swet_cape=A common cape that is found in Bronze Dungeons. It allows for the wearer to ride Swets, as they become friendly when they see someone wearing it.
+lore.aether_baubles.invisibility_cape=A cloak that makes the wearer completely invisible! Since mobs cannot see you, they cannot attack you. Sneak up on your enemies with it!
+lore.aether_baubles.agility_cape=A slightly rare cape, it can be seen in Bronze and Silver Dungeons. It makes the wearer's legs stronger, therefore they can walk up blocks instantly.
+lore.aether_baubles.valkyrie_cape=A rare cape that is found in Silver Dungeons. When worn, the wearer becomes lighter than air and can descend slowly.
+
+lore.aether_baubles.regeneration_stone=A treasure found in Silver Dungeons. This stone makes the wearer feel healthy, and heals their wounds. The effects can stack with other Regeneration Stones.
+lore.aether_baubles.iron_bubble=A common dungeon loot. It allows for the wearer to breathe underwater for a longer time than normal.
+
+lore.aether_baubles.repulsion_shield=A shield that protects the user from most projectiles. It will reflect the projectile back at the thrower and cause damage to them. Each time a projectile is reflected the shield will be damaged.
