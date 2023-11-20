@@ -58,7 +58,7 @@ public class RegistryHandler
 	public static Item agility_cape = new CopyBaubles("agility_cape", AccessoryType.CAPE).setDungeonLoot();
 	public static Item valkyrie_cape = new CopyBaubles("valkyrie_cape", AccessoryType.CAPE).setDungeonLoot();
 	
-	//public static Item golden_feather = new CopyBaubles("golden_feather", AccessoryType.MISC).setDungeonLoot();
+	public static Item golden_feather = new CopyBaubles("golden_feather", AccessoryType.MISC).setDungeonLoot();
 	public static Item regeneration_stone = new CopyBaubles("regeneration_stone", AccessoryType.MISC).setDungeonLoot();
 	public static Item iron_bubble = new CopyBaubles("iron_bubble", AccessoryType.MISC).setDungeonLoot();
 	
