@@ -38,7 +38,6 @@ public class AetherBaubles {
 	{
 		proxy.preInitialization();
 		MinecraftForge.EVENT_BUS.register(new RegistryHandler());
-		MinecraftForge.EVENT_BUS.register(new RecipeHandler());
 		MinecraftForge.EVENT_BUS.register(new LootHandler());
 		//AetherKeybinds.keyBindings[0].setKeyCode(Keyboard.KEY_NONE);
 		
@@ -50,5 +49,6 @@ public class AetherBaubles {
 		proxy.initialization();
 		baublesCreativeTab.setIcon(new ItemStack(ItemsAether.golden_ring));
 		MinecraftForge.EVENT_BUS.register(new PlayerHandler());
+		//MinecraftForge.EVENT_BUS.register(new RecipeHandler());
 	}
 }
