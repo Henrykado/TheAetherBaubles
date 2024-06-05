@@ -1,7 +1,6 @@
 package henrykado.aetherbaubles;
 
 import henrykado.aetherbaubles.baubles.ItemBaubles;
-import net.minecraft.world.storage.loot.LootEntry;
 import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTable;
@@ -44,6 +43,9 @@ public class LootHandler {
 				LootTable table = event.getTable();
 				LootPool pool = table.getPool("main");
 				
+				if (pool == null)
+					break;
+				
 				for (ItemBaubles i : RegistryHandler.ITEMS)
 					pool = replaceEntry(pool, i);
 				
@@ -56,10 +58,10 @@ public class LootHandler {
 	}
 	
 	public LootPool replaceEntry(LootPool pool, ItemBaubles replacement)
-	{
+	{			
 		String replaced = "aether_legacy:" + replacement.name;
 		
-		if (pool.getEntry(replaced) != null) 
+		if (pool.getEntry(replaced) != null)
 		{
 			pool.removeEntry(replaced);
 			pool.addEntry(new LootEntryItem(replacement, 1, 0, new LootFunction[0], new LootCondition[0], replaced));

@@ -1,8 +1,5 @@
 package henrykado.aetherbaubles;
 
-import com.gildedgames.the_aether.Aether;
-
-import henrykado.aetherbaubles.baubles.ItemBaubles;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
