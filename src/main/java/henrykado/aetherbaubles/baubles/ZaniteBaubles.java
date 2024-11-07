@@ -10,7 +10,8 @@ public class ZaniteBaubles extends ItemBaubles {
 	{
 		super(name, type);
 	}
-	
+
+	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) 
 	{
 		if (player.ticksExisted % 400 == 0) itemstack.damageItem(1, player);
