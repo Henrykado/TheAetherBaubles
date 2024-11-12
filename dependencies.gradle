@@ -40,4 +40,5 @@
 dependencies {
 	implementation rfg.deobf("curse.maven:aether-255308:3280119")
     implementation rfg.deobf("curse.maven:baubles-227083:2518667")
+    implementation rfg.deobf("curse.maven:aether-lost-content-318602:3038185")
 }

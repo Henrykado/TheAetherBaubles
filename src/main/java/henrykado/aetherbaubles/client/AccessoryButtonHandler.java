@@ -8,14 +8,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class AButtonHandler {
+public class AccessoryButtonHandler {
 	@SubscribeEvent
 	public void removeAccessoryButton(GuiScreenEvent.InitGuiEvent.Post event) {
 		List<GuiButton> list = event.getButtonList();
 		for (GuiButton button : list)
 			if (button instanceof GuiAccessoryButton) { 
-				button.enabled = false; 
-				button.visible = false; 
+				button.enabled = false;
+				button.visible = false;
 			}
 	}
 }

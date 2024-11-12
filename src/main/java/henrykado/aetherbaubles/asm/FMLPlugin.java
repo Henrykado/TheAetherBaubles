@@ -5,10 +5,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
+@IFMLLoadingPlugin.MCVersion("1.12.2")
+@IFMLLoadingPlugin.TransformerExclusions({"henrykado.aetherbaubles.asm"})
 public class FMLPlugin implements IFMLLoadingPlugin {
     @Override
     public String[] getASMTransformerClass() {
-        return new String[] {"henrykado.aetherbaubles.asm.ClassTransformer"};
+        return new String[] { ClassTransformer.class.getName() };
     }
 
     @Override

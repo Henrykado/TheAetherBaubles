@@ -1,14 +1,20 @@
 package henrykado.aetherbaubles;
 
+import baubles.api.BaubleType;
+import baubles.api.BaublesApi;
+import baubles.api.cap.IBaublesItemHandler;
 import com.gildedgames.the_aether.api.accessories.AccessoryType;
 import com.gildedgames.the_aether.items.ItemsAether;
 import com.gildedgames.the_aether.items.accessories.ItemAccessory;
 import com.gildedgames.the_aether.registry.creative_tabs.AetherCreativeTabs.AetherTab;
 
+import com.legacy.lostaether.items.ItemsLostAether;
 import henrykado.aetherbaubles.baubles.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -24,7 +30,7 @@ import org.apache.logging.log4j.Logger;
 	modid = Tags.MODID,
 	name = Tags.MODNAME,
 	version = Tags.VERSION,
-	dependencies = "required-after:baubles;required-after:aether_legacy",
+	dependencies = "required-after:baubles;required-after:aether_legacy;after:lost_aether;",
 	acceptedMinecraftVersions = "[1.12.2]",
 	useMetadata = true
 )
