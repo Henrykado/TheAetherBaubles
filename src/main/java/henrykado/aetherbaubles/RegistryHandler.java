@@ -15,7 +15,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
+//import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -138,11 +138,6 @@ public class RegistryHandler
 		registerColor(ItemsAether.blue_cape);
 		registerColor(ItemsAether.yellow_cape);
 		registerColor(ItemsAether.white_cape);
-	}
-
-	@SubscribeEvent
-	public void attachCapabilites(AttachCapabilitiesEvent event) {
-		event.addCapability();
 	}
 
 	// doesn't work for some (probably dumb) reason
