@@ -1,6 +1,5 @@
 package henrykado.aetherbaubles.asm;
 
-import com.gildedgames.the_aether.containers.inventory.InventoryAccessories;
 import henrykado.aetherbaubles.baubles.ItemBaubles;
 import henrykado.aetherbaubles.baubles.LeatherGloves;
 import henrykado.aetherbaubles.util.ASMMethods;

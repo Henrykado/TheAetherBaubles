@@ -1,25 +1,13 @@
 package henrykado.aetherbaubles;
 
-import baubles.api.BaubleType;
-import baubles.api.BaublesApi;
-import baubles.api.cap.IBaublesItemHandler;
-import com.gildedgames.the_aether.api.accessories.AccessoryType;
+import baubles.api.cap.BaublesCapabilities;
 import com.gildedgames.the_aether.items.ItemsAether;
-import com.gildedgames.the_aether.items.accessories.ItemAccessory;
-import com.gildedgames.the_aether.registry.creative_tabs.AetherCreativeTabs.AetherTab;
-
-import com.legacy.lostaether.items.ItemsLostAether;
-import henrykado.aetherbaubles.baubles.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -43,12 +31,12 @@ public class AetherBaubles {
 
 	public static final Logger LOGGER = LogManager.getLogger(Tags.MODID);
 	
-	//public static AetherTab baublesCreativeTab = new AetherTab("aether_baubles");
-	
 	@EventHandler
 	public void preInitialization(FMLPreInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new RegistryHandler());
+
+		//BaublesCapabilities.CAPABILITY_ITEM_BAUBLE
 	}
 	
 	@EventHandler

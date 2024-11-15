@@ -1,5 +1,6 @@
 package henrykado.aetherbaubles.client;
 
+import com.gildedgames.the_aether.items.accessories.ItemAccessory;
 import henrykado.aetherbaubles.baubles.ItemBaubles;
 import henrykado.aetherbaubles.baubles.LeatherGloves;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -20,6 +21,6 @@ public class ABColor implements IItemColor {
         if (this.item.getClass() == LeatherGloves.class)
             return ((LeatherGloves) stack.getItem()).getColor(stack);
 
-        return ((ItemBaubles) stack.getItem()).getColorFromItemStack(stack, 0);
+        return ((ItemAccessory) stack.getItem()).getColorFromItemStack(stack, 0);
     }
 }

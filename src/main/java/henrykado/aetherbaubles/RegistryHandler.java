@@ -14,20 +14,26 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 
 public class RegistryHandler 
 {
 	public static IForgeRegistry<Item> itemRegistry;
 
-	public void initialization()
+	@SubscribeEvent(priority = EventPriority.LOW)
+	public void onRegisterItemEvent(RegistryEvent.Register<Item> event)
 	{
+		itemRegistry = event.getRegistry();
+
 		ItemsAether.leather_gloves = register("leather_gloves", new LeatherGloves(AccessoryType.GLOVE).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 		ItemsAether.iron_gloves = register("iron_gloves", new ItemBaubles(AccessoryType.GLOVE).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 		ItemsAether.golden_gloves = register("golden_gloves", new ItemBaubles(AccessoryType.GLOVE).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GOLD).setColor(0xFBF424));
@@ -48,7 +54,7 @@ public class RegistryHandler
 
 		ItemsAether.iron_pendant = register("iron_pendant", ((ItemAccessory) new ItemBaubles(AccessoryType.PENDANT).setColor(0xdddddd)).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 		ItemsAether.golden_pendant = register("golden_pendant", ((ItemAccessory) new ItemBaubles(AccessoryType.PENDANT).setColor(0xeaee57)).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_GOLD));
-		ItemsAether.zanite_pendant = register("zanite_pendant", new ItemBaubles(AccessoryType.PENDANT).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON).setMaxDamage(98));
+		ItemsAether.zanite_pendant = register("zanite_pendant", new ItemBaubles(AccessoryType.PENDANT).setEquipSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON).setTexture("zanite").setMaxDamage(98));
 		ItemsAether.ice_pendant = register("ice_pendant", new ItemBaubles(AccessoryType.PENDANT).setColor(0x95e6e7).setMaxDamage(250));
 
 		ItemsAether.red_cape = register("red_cape", new ItemBaubles(AccessoryType.CAPE).setElytraTexture("base_elytra").setColor(0xe81111));
@@ -93,13 +99,6 @@ public class RegistryHandler
 		return register(Aether.modid, name, item);
 	}
 
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void onRegisterItemEvent(RegistryEvent.Register<Item> event)
-	{
-		itemRegistry = event.getRegistry();
-		initialization();
-	}
-
 	@SubscribeEvent
 	public void onRegisterCraftingEvent(RegistryEvent.Register<IRecipe> event)
 	{
@@ -139,5 +138,27 @@ public class RegistryHandler
 		registerColor(ItemsAether.blue_cape);
 		registerColor(ItemsAether.yellow_cape);
 		registerColor(ItemsAether.white_cape);
+	}
+
+	@SubscribeEvent
+	public void attachCapabilites(AttachCapabilitiesEvent event) {
+		event.addCapability();
+	}
+
+	// doesn't work for some (probably dumb) reason
+	// something to do with the mappings being remapped to an overriden item?
+	@SubscribeEvent(priority = EventPriority.LOW)
+	public void remapOutdatedItemMappings(RegistryEvent.MissingMappings<Item> event)
+	{
+        for (Mapping<Item> mapping : event.getMappings()) {
+			try
+			{
+                mapping.remap(itemRegistry.getValue(new ResourceLocation(Aether.modid, mapping.key.getPath())));
+            }
+			catch (Exception e)
+			{
+                AetherBaubles.LOGGER.info("Failed to remap legacy bauble item: {}", mapping.key.getPath());
+            }
+        }
 	}
 }
