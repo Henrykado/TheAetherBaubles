@@ -1,7 +1,5 @@
 package henrykado.aetherbaubles.asm;
 
-import henrykado.aetherbaubles.baubles.ItemBaubles;
-import henrykado.aetherbaubles.baubles.LeatherGloves;
 import henrykado.aetherbaubles.util.ASMMethods;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.logging.log4j.LogManager;
@@ -61,27 +59,24 @@ public class ClassTransformer implements IClassTransformer {
             classNode.accept(writer);
             return writer.toByteArray();
         }
-        else if (transformedName.equals("com.gildedgames.the_aether.client.PlayerGloveRenderer") ||
-                transformedName.equals("com.gildedgames.the_aether.client.renders.entities.layer.AccessoriesLayer")) {
+        else if (transformedName.equals("com.gildedgames.the_aether.items.accessories.ItemAccessory")) {
             ClassNode classNode = new ClassNode();
             new ClassReader(basicClass).accept(classNode, ClassReader.SKIP_FRAMES);
 
-            for(MethodNode method : classNode.methods) {
-				if ("renderArm".equals(method.name) || "renderLeftArmGlove".equals(method.name) || "renderRightGlove".equals(method.name)
-                        || "doRenderLayer".equals(method.name))
-				{
-                    for (AbstractInsnNode node : method.instructions.toArray()) {
-                        if (node instanceof LdcInsnNode) {
-                            if (((LdcInsnNode) node).cst.toString().equals("Lcom/gildedgames/the_aether/items/accessories/ItemAccessory;")) {
-                                ((LdcInsnNode)node).cst = Type.getType(ItemBaubles.class);
-                            }
-                            else if (((LdcInsnNode) node).cst.toString().equals("Lcom/gildedgames/the_aether/items/accessories/ItemAccessoryDyable;")) {
-                                ((LdcInsnNode)node).cst = Type.getType(LeatherGloves.class);
-                            }
-                        }
-                    }
-				}
-			}
+            for (MethodNode method : classNode.methods) {
+                if (method.name.equals("onItemRightClick")) {
+                    method.instructions.clear();
+
+                    InsnList insnList = new InsnList();
+                    insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
+                    insnList.add(new VarInsnNode(Opcodes.ALOAD, 2));
+                    insnList.add(new VarInsnNode(Opcodes.ALOAD, 3));
+                    insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(ASMMethods.class), "onItemRightClick", "(Lcom/gildedgames/the_aether/items/accessories/ItemAccessory;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/util/EnumHand;)Lnet/minecraft/util/ActionResult;", false));
+                    insnList.add(new InsnNode(Opcodes.ARETURN));
+
+                    method.instructions.add(insnList);
+                }
+            }
 
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
             classNode.accept(writer);

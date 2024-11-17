@@ -2,35 +2,29 @@ package henrykado.aetherbaubles.util;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
+import baubles.api.IBauble;
+import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
-import com.gildedgames.the_aether.Aether;
+import com.gildedgames.the_aether.api.AetherAPI;
 import com.gildedgames.the_aether.api.accessories.AccessoryType;
 import com.gildedgames.the_aether.items.accessories.ItemAccessory;
 import henrykado.aetherbaubles.ABConfig;
-import henrykado.aetherbaubles.AetherBaubles;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-
-import javax.annotation.Nonnull;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
 
 public class ASMMethods {
+    public static final AccessoryType[] ACC_TYPE_LOOKUP = {AccessoryType.PENDANT, AccessoryType.CAPE, AccessoryType.SHIELD, AccessoryType.MISC, AccessoryType.RING, AccessoryType.RING, AccessoryType.GLOVE, AccessoryType.MISC};
+
     public static ItemStack getAccessoryStack(int slotID, EntityPlayer player)
     {
         if (player == null) return ItemStack.EMPTY;
 
         IBaublesItemHandler inv = BaublesApi.getBaublesHandler(player);
 
-        AccessoryType accType = switch (slotID) {
-            case 0 -> AccessoryType.PENDANT;
-            case 1 -> AccessoryType.CAPE;
-            case 2 -> AccessoryType.SHIELD;
-            case 4, 5 -> AccessoryType.RING;
-            case 6 -> AccessoryType.GLOVE;
-            default -> AccessoryType.MISC; // 3, 7
-        };
+        AccessoryType accType = ACC_TYPE_LOOKUP[slotID];
 
         BaubleType baubleType = switch (accType) {
             case PENDANT -> ABConfig.pendantBaubleType;
@@ -41,15 +35,17 @@ public class ASMMethods {
             default -> ABConfig.miscBaubleType; // MISC
         };
 
-        boolean skipNext = false;
-        if (slotID == 5 || slotID == 7) skipNext = true;
+        boolean skipNext = slotID == 5 || slotID == 7;
 
         for (int i : baubleType.getValidSlots()) {
             ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty() && stack.getItem() instanceof ItemAccessory && ((ItemAccessory)stack.getItem()).getType().equals(accType) && !skipNext) {
+            if (!stack.isEmpty() && stack.getItem() instanceof ItemAccessory && ((ItemAccessory)stack.getItem()).getType().equals(accType)) {
+                if (skipNext) {
+                    skipNext = false;
+                    continue;
+                }
                 return inv.getStackInSlot(i);
             }
-            else skipNext = false;
         }
 
         return ItemStack.EMPTY;
@@ -70,15 +66,11 @@ public class ASMMethods {
             default -> ABConfig.miscBaubleType; // 3, 7
         };
 
-        boolean skipNext = false;
-        if (slotID == 5 || slotID == 7) skipNext = true;
-
         for (int i : baubleType.getValidSlots()) {
-            if (inv.isItemValidForSlot(i, stack, player) && !skipNext) {
+            if (inv.isItemValidForSlot(i, stack, player) && inv.getStackInSlot(i).isEmpty()) {
                 inv.setStackInSlot(i, stack);
                 return stack;
             }
-            else skipNext = false;
         }
 
         return ItemStack.EMPTY;
@@ -90,9 +82,35 @@ public class ASMMethods {
 
         NonNullList<ItemStack> list = NonNullList.withSize(inv.getSlots(), ItemStack.EMPTY);
         for (int i = 0; i < inv.getSlots(); i++) {
-            list.set(i, inv.getStackInSlot(i));
+            list.set(i, inv.getStackInSlot(i).getItem() instanceof ItemAccessory ? inv.getStackInSlot(i) : ItemStack.EMPTY);
         }
 
         return list;
+    }
+
+    public static ActionResult<ItemStack> onItemRightClick(ItemAccessory item, EntityPlayer player, EnumHand hand)
+    {
+        IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+        ItemStack heldItem = player.getHeldItem(hand);
+
+        IBauble cap = heldItem.getCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null);
+        for(int i : cap.getBaubleType(new ItemStack(item)).getValidSlots()) {
+            if(baubles.getStackInSlot(i).isEmpty() && baubles.isItemValidForSlot(i, heldItem, player) && cap.canEquip(heldItem, player)) {
+                SoundEvent soundEvent = SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
+                if (item.getEquipSound() != null) {
+                    soundEvent = item.getEquipSound();
+                }
+                player.playSound(soundEvent, 1.0F, 1.0F);
+
+                baubles.setStackInSlot(i, heldItem.copy());
+                if(!player.capabilities.isCreativeMode) {
+                    player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+                }
+
+                return new ActionResult<>(EnumActionResult.SUCCESS, heldItem);
+            }
+        }
+
+        return new ActionResult<>(EnumActionResult.FAIL, heldItem);
     }
 }

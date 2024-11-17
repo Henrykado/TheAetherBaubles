@@ -1,13 +1,16 @@
 package henrykado.aetherbaubles;
 
 import baubles.api.cap.BaublesCapabilities;
+import com.gildedgames.the_aether.Aether;
 import com.gildedgames.the_aether.items.ItemsAether;
+import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -35,13 +38,21 @@ public class AetherBaubles {
 	public void preInitialization(FMLPreInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new RegistryHandler());
-
-		//BaublesCapabilities.CAPABILITY_ITEM_BAUBLE
 	}
+
+	//@EventHandler
+	//public void initialization(FMLInitializationEvent event) {}
 	
 	@EventHandler
 	public void postInitialization(FMLPostInitializationEvent event)
 	{
+		if (ABConfig.renamePendants) {
+			ItemsAether.iron_pendant.setTranslationKey("iron_amulet");
+			ItemsAether.golden_pendant.setTranslationKey("golden_amulet");
+			ItemsAether.zanite_pendant.setTranslationKey("zanite_amulet");
+			ItemsAether.ice_pendant.setTranslationKey("ice_amulet");
+		}
+
 		proxy.postInitialization();
 	}
 }

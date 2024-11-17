@@ -15,7 +15,5 @@ public class ClientProxy extends CommonProxy {
 	{
 		MinecraftForge.EVENT_BUS.register(new AccessoryButtonHandler());
 		AetherKeybinds.keyBindingAccessories = new KeyBinding("key.aether.accessory_menu", Keyboard.KEY_NONE, "key.aether.category");
-
-		RegistryHandler.registerColors();
 	}
 }
