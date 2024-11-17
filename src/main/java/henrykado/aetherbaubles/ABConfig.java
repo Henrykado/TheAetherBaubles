@@ -16,10 +16,6 @@ public class ABConfig {
 	@Config.Comment("Changes Pendants' display names so they are referred to as Amulets")
 	public static boolean renamePendants = true;
 
-	@Name("Enable Equip Sounds")
-	@Config.Comment("Enables equip sounds when equipping an aether bauble")
-	public static boolean enableEquipSounds = true;
-
 	@Name("Gloves Accessories' Baubles Type")
 	public static BaubleType glovesBaubleType = BaubleType.RING;
 	@Name("Pendant Accessories' Baubles Type")
