@@ -60,6 +60,10 @@ public class RegistryHandler
 
 								if (baubleType.equals(BaubleType.RING) || baubleType.equals(BaubleType.TRINKET)) {
 									AccessoryType accessoryType = ((ItemAccessory)itemstack.getItem()).getType();
+									if (baubleType.equals(BaubleType.RING) && (accessoryType.equals(AccessoryType.RING) || accessoryType.equals(AccessoryType.MISC))) {
+										return true;
+									}
+
 									boolean skipNext = accessoryType.equals(AccessoryType.RING) || accessoryType.equals(AccessoryType.MISC);
 
 									IBaublesItemHandler inv = BaublesApi.getBaublesHandler((EntityPlayer) player);
