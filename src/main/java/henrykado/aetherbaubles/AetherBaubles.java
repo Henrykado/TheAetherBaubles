@@ -29,7 +29,7 @@ public class AetherBaubles {
 	@Instance(Tags.MODID)
 	public static AetherBaubles instance;
 	
-	@SidedProxy(modId = Tags.MODID, clientSide = "henrykado.aetherbaubles.client.ClientProxy")
+	@SidedProxy(modId = Tags.MODID, clientSide = "henrykado.aetherbaubles.client.ClientProxy", serverSide = "henrykado.aetherbaubles.ServerProxy")
 	public static CommonProxy proxy;
 
 	public static final Logger LOGGER = LogManager.getLogger(Tags.MODID);
